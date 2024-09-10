@@ -11,6 +11,10 @@ on:
         description: 'Greeting message'
         required: true
         type: string
+      check_bool:
+        description: 'Boolean to check'
+        required: true
+        type: boolean
 
 jobs:
   greet:
@@ -19,4 +23,14 @@ jobs:
     - name: Generate Greeting
       id: greet
       run: |
-        echo "The greeting is: ${{ inputs.greeting }} ${{ inputs.name }}" && echo "::set-output name=message::The greeting is: ${{ inputs.greeting }} ${{ inputs.name }}"
+        echo "The greeting is: ${{ inputs.greeting }} ${{ inputs.name }}"
+        echo "::set-output name=message::The greeting is: ${{ inputs.greeting }} ${{ inputs.name }}"
+        
+    - name: Test Boolean
+      id: test
+      run: |
+        if [ "${{ inputs.check_bool }}" = "true" ]; then
+          echo "my input is true"
+        else
+          echo "my input is false"
+        fi
