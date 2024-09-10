@@ -1,0 +1,22 @@
+name: Greet
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        description: 'Name to greet'
+        required: true
+        type: string
+      greeting:
+        description: 'Greeting message'
+        required: true
+        type: string
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Generate Greeting
+      id: greet
+      run: |
+        echo "The greeting is: ${{ inputs.greeting }} ${{ inputs.name }}" && echo "::set-output name=message::The greeting is: ${{ inputs.greeting }} ${{ inputs.name }}"
