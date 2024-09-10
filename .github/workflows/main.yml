@@ -5,10 +5,16 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name to use in the greeting'
+        required: true
+        default: 'Manual Trigger'
+        type: string
 
 jobs:
   call-reusable-workflow:
     uses: ./.github/workflows/greet.yml
     with:
-      name: 'World'
+      name: ${{ github.event_name == 'push' && 'Push Trigger' || github.event.inputs.name }}
       greeting: 'Hello'
