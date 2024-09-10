@@ -23,4 +23,4 @@ jobs:
     with:
       name: ${{ github.event_name == 'push' && 'Push Trigger' || github.event.inputs.name }}
       greeting: 'Hello'
-      check_bool: ${{ github.event_name == 'push' && 'false' || github.event.inputs.check_bool }}
+      check_bool: ${{ github.event_name == 'push' && false || github.event.inputs.check_bool }}
