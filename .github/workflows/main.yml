@@ -12,16 +12,15 @@ on:
         default: 'Manual Trigger'
         type: string
       check_bool:
-        description: 'pass true or false'
+        description: 'Pass true or false'
         required: true
         default: true
         type: boolean
-
 
 jobs:
   call-reusable-workflow:
     uses: ./.github/workflows/greet.yml
     with:
-      name: ${{ github.event_name == 'push' && 'Push Trigger' || github.event.inputs.name }}
+      name: ${{ github.event_name == 'push' ? 'Push Trigger' : github.event.inputs.name }}
       greeting: 'Hello'
-      check_bool: ${{ github.event_name == 'push' && false || github.event.inputs.check_bool }}
+      check_bool: ${{ github.event_name == 'push' ? false : github.event.inputs.check_bool }}
